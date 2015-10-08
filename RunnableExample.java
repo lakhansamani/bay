@@ -99,7 +99,7 @@ public class RunnableExample {
                     String[] Class=Extract("class",content);
                     String[] Info=Extract("text",content);
                     final String[] Text = t1.split("\\s+");
-                    bayes.learn("positive", Arrays.asList(Text));
+                    bayes.learn(Class, Arrays.asList(Text));
                 }
             }
         }
