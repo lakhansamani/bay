@@ -16,9 +16,12 @@ public class RunnableExample {
         
         
         
-        /*Addition*/
-        BLearn("/Users/sounakbanerjee/Desktop/packagedemo");
-        BClass("/Users/sounakbanerjee/Desktop/packagedemo");
+        /*Addition
+            args[0] takes input of RCV path
+        */
+
+        BLearn(args[0]);
+        BClass(args[0]);
 
         /*
          * The classifier can learn from classifications that are handed over
