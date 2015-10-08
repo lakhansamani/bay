@@ -1,11 +1,9 @@
 #Java Naive Bayes Classifier
-==================
-
 
 ## Paramters
 
 * Pass RCV folder path as 1st argument while running this code
-* example: java Runnable exmpale /Users/usernmae/folder_path
+* example: ```java Runnable exmpale /Users/usernmae/folder_path```
 
 Overview
 ------------------
