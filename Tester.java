@@ -25,10 +25,10 @@ public class Tester {
                     //adds text to hashmap
                     HashMap<String,String[]> inner_map=new HashMap();
                     inner_map.put("text",text_content.split("\\s"));
+                    
+                    //TODO: extracts class tag
+                    
                     final_map.put(file.getAbsolutePath(),inner_map);
-                    
-                    //extracts class tag
-                    
                 }
             }
         }
