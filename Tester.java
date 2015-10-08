@@ -18,8 +18,16 @@ public class Tester {
                 }
                 else if(file.getName().matches("^(.*?)")&& !file.getName().startsWith(".") && !file.isHidden()){
                     content=new String(Files.readAllBytes(Paths.get(file.getAbsolutePath())));
-                    String text_content=content.split("<text>")[1].split("</text>")[0]; //extracts tag
+                    //extracts from <text></text>
+                    String text_content=content.split("<text>")[1].split("</text>")[0]; 
+                    //removes <p></p> tag
                     text_content=text_content.replaceAll("\\<[^>]*>","");
+                    //adds text to hashmap
+                    HashMap<String,String[]> inner_map=new HashMap();
+                    inner_map.put("text",text_content.split("\\s"));
+                    final_map.put(file.getAbsolutePath(),inner_map);
+                    
+                    //extracts class tag
                     
                 }
             }
@@ -31,6 +39,18 @@ public class Tester {
         return final_map;
     }
     public static void main(String[] args) {
-        extract(args[0]);
+        HashMap<String,HashMap<String,String[]>> map=extract(args[0]);
+        for (Map.Entry entry : map.entrySet()) {
+            System.out.println("---------File name:"+entry.getKey() + "--------");
+            HashMap<String,String[]> inner_map=(HashMap)entry.getValue();
+            for(Map.Entry inner_entry: inner_map.entrySet()){
+                StringBuilder builder = new StringBuilder();
+                String[] arr=(String[])inner_entry.getValue();
+                for(String s : arr) {
+                    builder.append(s);
+                }
+                System.out.println(builder.toString());
+            }
+        }
     }
 }
