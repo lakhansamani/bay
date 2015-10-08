@@ -11,8 +11,14 @@ public class RunnableExample {
          * Strings and the context will be classified with a String according
          * to the featureset of the context.
          */
-        final Classifier<String, String> bayes =
-                new BayesClassifier<String, String>();
+     //   final Classifier<String, String> bayes =
+     //           new BayesClassifier<String, String>();
+        
+        
+        
+        /*Addition*/
+        BLearn("/Users/sounakbanerjee/Desktop/packagedemo");
+        BClass("/Users/sounakbanerjee/Desktop/packagedemo");
 
         /*
          * The classifier can learn from classifications that are handed over
@@ -20,11 +26,13 @@ public class RunnableExample {
          * are the text's features. The category of the text will either be
          * positive or negative.
          */
-        final String[] positiveText = "I love sunny days".split("\\s");
+        
+        
+        /*final String[] positiveText = "I love sunny days".split("\\s");
         bayes.learn("positive", Arrays.asList(positiveText));
 
         final String[] negativeText = "I hate rain".split("\\s");
-        bayes.learn("negative", Arrays.asList(negativeText));
+        bayes.learn("negative", Arrays.asList(negativeText));*/
 
         /*
          * Now that the classifier has "learned" two classifications, it will
@@ -32,13 +40,14 @@ public class RunnableExample {
          * a Classification Object, that contains the given featureset,
          * classification probability and resulting category.
          */
-        final String[] unknownText1 = "today is a sunny day".split("\\s");
+        
+        /*final String[] unknownText1 = "today is a sunny day".split("\\s");
         final String[] unknownText2 = "there will be rain".split("\\s");
 
         System.out.println( // will output "positive"
                 bayes.classify(Arrays.asList(unknownText1)).getCategory());
         System.out.println( // will output "negative"
-                bayes.classify(Arrays.asList(unknownText2)).getCategory());
+                bayes.classify(Arrays.asList(unknownText2)).getCategory());*/
 
         /*
          * The BayesClassifier extends the abstract Classifier and provides
@@ -69,6 +78,59 @@ public class RunnableExample {
          * number of learning sessions it will record can be set as follows:
          */
         bayes.setMemoryCapacity(500); // remember the last 500 learned classifications
+    }
+    
+    
+    public static void BLearn(String sDir){
+        
+        FileInputStream fin;
+        File[] faFiles = new File(sDir).listFiles();
+        String content="";
+        final Classifier<String, String> bayes = new BayesClassifier<String, String>();
+        
+        try{
+            for(File file: faFiles){
+                if(file.isDirectory()){
+                    printFnames(file.getAbsolutePath());
+                }
+                else if(file.getName().matches("^(.*?)")&&!file.getName().equals(".DS_Store")){
+                    content=new String(Files.readAllBytes(Paths.get(file.getAbsolutePath())));
+                    final String[] Text = content.split("\\s+");
+                    String Class=Extract("Class",Text);
+                    String Info=Extract("",Text);
+                    bayes.learn("positive", Arrays.asList(Text));
+                }
+            }
+        }
+        catch (IOException e){
+            System.err.println ("Unable to read from file");
+            System.exit(-1);
+        }
+    }
+    
+    public static void BClass(String sDir){
+        
+        FileInputStream fin;
+        File[] faFiles = new File(sDir).listFiles();
+        String content="";
+        final Classifier<String, String> bayes = new BayesClassifier<String, String>();
+        
+        try{
+            for(File file: faFiles){
+                if(file.isDirectory()){
+                    printFnames(file.getAbsolutePath());
+                }
+                else if(file.getName().matches("^(.*?)")&&!file.getName().equals(".DS_Store")){
+                    content=new String(Files.readAllBytes(Paths.get(file.getAbsolutePath())));
+                    final String[] Text = content.split("\\s+");
+                    System.out.println(bayes.classify(Arrays.asList(Text)).getCategory());
+                }
+            }
+        }
+        catch (IOException e){
+            System.err.println ("Unable to read from file");
+            System.exit(-1);
+        }
     }
 
 }
