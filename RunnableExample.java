@@ -95,9 +95,10 @@ public class RunnableExample {
                 }
                 else if(file.getName().matches("^(.*?)")&&!file.getName().equals(".DS_Store")){
                     content=new String(Files.readAllBytes(Paths.get(file.getAbsolutePath())));
-                    final String[] Text = content.split("\\s+");
-                    String Class=Extract("Class",Text);
-                    String Info=Extract("",Text);
+                    //final String[] Text = content.split("\\s+");
+                    String[] Class=Extract("class",content);
+                    String[] Info=Extract("text",content);
+                    final String[] Text = t1.split("\\s+");
                     bayes.learn("positive", Arrays.asList(Text));
                 }
             }
@@ -107,6 +108,8 @@ public class RunnableExample {
             System.exit(-1);
         }
     }
+    
+    
     
     public static void BClass(String sDir){
         
@@ -126,6 +129,33 @@ public class RunnableExample {
                     System.out.println(bayes.classify(Arrays.asList(Text)).getCategory());
                 }
             }
+        }
+        catch (IOException e){
+            System.err.println ("Unable to read from file");
+            System.exit(-1);
+        }
+    }
+    
+    
+    
+    
+    public static String[] Extract(String tag,String input){
+        
+        String content="";
+        
+        if(tag.equals("text")){
+            for(String word: input){
+                if(word.equals("<"+tag+">"))
+                    break;
+            for(String word: input){
+                        
+                    if()
+                    
+                }
+            }
+        }
+        else if(tag.equals("class")){
+            
         }
         catch (IOException e){
             System.err.println ("Unable to read from file");
