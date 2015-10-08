@@ -1,7 +1,6 @@
 
 
-import java.util.Arrays;
-
+import java.util.*;
 public class RunnableExample {
 
     public static void main(String[] args) {
@@ -11,14 +10,17 @@ public class RunnableExample {
          * Strings and the context will be classified with a String according
          * to the featureset of the context.
          */
-     //   final Classifier<String, String> bayes =
-     //           new BayesClassifier<String, String>();
+        final Classifier<String, String> bayes =
+                new BayesClassifier<String, String>();
         
         
         
-        /*Addition*/
-        BLearn("/Users/sounakbanerjee/Desktop/packagedemo");
-        BClass("/Users/sounakbanerjee/Desktop/packagedemo");
+        /*Addition
+            args[0] takes input of RCV path
+        */
+
+        //BLearn(args[0]);
+        //BClass(args[0]);
 
         /*
          * The classifier can learn from classifications that are handed over
@@ -69,8 +71,8 @@ public class RunnableExample {
          *   ]
          * ]
          */
-        ((BayesClassifier<String, String>) bayes).classifyDetailed(
-                Arrays.asList(unknownText1));
+        //((BayesClassifier<String, String>) bayes).classifyDetailed(
+                //Arrays.asList(unknownText1));
 
         /*
          * Please note, that this particular classifier implementation will
@@ -81,86 +83,91 @@ public class RunnableExample {
     }
     
     
-    public static void BLearn(String sDir){
+    // public static HashMap <String,HashMap<String,String[]>> BLearn(String sDir){
         
-        FileInputStream fin;
-        File[] faFiles = new File(sDir).listFiles();
-        String content="";
-        final Classifier<String, String> bayes = new BayesClassifier<String, String>();
+
+    //     FileInputStream fin;
+    //     File[] faFiles = new File(sDir).listFiles();
+    //     String content="";
+    //     final Classifier<String, String> bayes = new BayesClassifier<String, String>();
+    //     HashMap <String, HashMap<String,String[]>> final_map=new HashMap<>();
+    //     try{
+    //         for(File file: faFiles){
+    //             if(file.isDirectory()){
+    //                 BLearn(file.getAbsolutePath());
+    //             }
+    //             else if(file.getName().matches("^(.*?)")&& !file.getName().startsWith(".") && !file.isHidden()){
+    //                 content=new String(Files.readAllBytes(Paths.get(file.getAbsolutePath())));
+    //                 //final String[] Text = content.split("\\s+");
+    //                 String[] Class=Extract("class",content);
+    //                 final
+    //                 String[] Info=Extract("text",content);
+    //                 final String[] Text = t1.split("\\s+");
+
+    //                 //bayes.learn("positive", Arrays.asList(Text));
+    //             }
+    //         }
+    //     }
+    //     catch (IOException e){
+    //         System.err.println ("Unable to read from file");
+    //         System.exit(-1);
+    //     }
+    //     return final_map;
+    // }
+
+    
+    
+    // public static void BClass(String sDir){
         
-        try{
-            for(File file: faFiles){
-                if(file.isDirectory()){
-                    printFnames(file.getAbsolutePath());
-                }
-                else if(file.getName().matches("^(.*?)")&&!file.getName().equals(".DS_Store")){
-                    content=new String(Files.readAllBytes(Paths.get(file.getAbsolutePath())));
-                    //final String[] Text = content.split("\\s+");
-                    String[] Class=Extract("class",content);
-                    String[] Info=Extract("text",content);
-                    final String[] Text = t1.split("\\s+");
-                    bayes.learn(Class, Arrays.asList(Text));
-                }
-            }
-        }
-        catch (IOException e){
-            System.err.println ("Unable to read from file");
-            System.exit(-1);
-        }
-    }
-    
-    
-    
-    public static void BClass(String sDir){
+    //     FileInputStream fin;
+    //     File[] faFiles = new File(sDir).listFiles();
+    //     String content="";
+    //     final Classifier<String, String> bayes = new BayesClassifier<String, String>();
         
-        FileInputStream fin;
-        File[] faFiles = new File(sDir).listFiles();
-        String content="";
-        final Classifier<String, String> bayes = new BayesClassifier<String, String>();
+    //     try{
+    //         for(File file: faFiles){
+    //             if(file.isDirectory()){
+    //                 printFnames(file.getAbsolutePath());
+    //             }
+    //             else if(file.getName().matches("^(.*?)")&&!file.getName().equals(".DS_Store")){
+    //                 content=new String(Files.readAllBytes(Paths.get(file.getAbsolutePath())));
+    //                 final String[] Text = content.split("\\s+");
+    //                 System.out.println(bayes.classify(Arrays.asList(Text)).getCategory());
+    //             }
+    //         }
+    //     }
+    //     catch (IOException e){
+    //         System.err.println ("Unable to read from file");
+    //         System.exit(-1);
+    //     }
+    // }
+    
+    
+    
+    
+    // public static String[] Extract(String tag,String input){
         
-        try{
-            for(File file: faFiles){
-                if(file.isDirectory()){
-                    printFnames(file.getAbsolutePath());
-                }
-                else if(file.getName().matches("^(.*?)")&&!file.getName().equals(".DS_Store")){
-                    content=new String(Files.readAllBytes(Paths.get(file.getAbsolutePath())));
-                    final String[] Text = content.split("\\s+");
-                    System.out.println(bayes.classify(Arrays.asList(Text)).getCategory());
-                }
-            }
-        }
-        catch (IOException e){
-            System.err.println ("Unable to read from file");
-            System.exit(-1);
-        }
-    }
-    
-    
-    
-    
-    public static String[] Extract(String tag,String input){
+    //     try{
+    //         String content="";
         
-        String content="";
-        
-        if(tag.equals("text")){
-            for(String word: input){
-                if(word.equals("<"+tag+">"))
-                    break;
-            for(String word: input){
+    //         if(tag.equals("text")){
+    //             for(String word: input){
+    //                 if(word.equals("<"+tag+">"))
+    //                     break;
+    //             for(String word: input){
+                            
                         
-                    if()
-                    
-                }
-            }
-        }
-        else if(tag.equals("class")){
-            
-        }
-        catch (IOException e){
-            System.err.println ("Unable to read from file");
-            System.exit(-1);
-        }
-    }
+    //                 }
+    //             }
+    //         }
+    //         else if(tag.equals("class")){
+                
+    //         }
+    //     }
+    //     catch (Exception e){
+    //         System.err.println ("Unable to read from file");
+    //         System.exit(-1);
+    //     }
+    // }
 
 }

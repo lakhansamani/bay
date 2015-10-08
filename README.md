@@ -1,7 +1,9 @@
-Java Naive Bayes Classifier
-==================
+#Java Naive Bayes Classifier
 
-Nothing special. It works and is well documented, so you should get it running without wasting too much time searching for other alternatives on the net.
+## Paramters
+
+* Pass RCV folder path as 1st argument while running this code
+* example: ```java Runnable exmpale /Users/usernmae/folder_path```
 
 Overview
 ------------------
