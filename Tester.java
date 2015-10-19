@@ -78,18 +78,46 @@ public class Tester {
         return final_map;
     }
     public static void main(String[] args)  throws Exception{
+        final Classifier<String, String> bayes = new BayesClassifier<String, String>();
+
         HashMap<String,HashMap<String,String[]>> map=extract(args[0]);
         for (Map.Entry entry : map.entrySet()) {
-            System.out.println("---------File name:"+entry.getKey() + "--------");
             HashMap<String,String[]> inner_map=(HashMap)entry.getValue();
+            String class1="";
+            List<String> al=new ArrayList();
             for(Map.Entry inner_entry: inner_map.entrySet()){
-                StringBuilder builder = new StringBuilder();
-                String[] arr=(String[])inner_entry.getValue();
-                for(String s : arr) {
-                    builder.append(s);
+                
+                String key=(String)inner_entry.getKey();
+                
+                if(key.equals("class")){
+                    String classes[]=(String[])inner_entry.getValue();
+                    class1=classes[0];
                 }
-                System.out.println(builder.toString());
+                else{
+                    String text[]=(String[])inner_entry.getValue();
+                    al=Arrays.asList(text);
+                }
+                bayes.learn(class1, al);
             }
+            
+        }
+
+        HashMap<String,HashMap<String,String[]>> map2=extract(args[1]);
+        for (Map.Entry entry : map2.entrySet()) {
+            System.out.println("--------- Classified from File name:"+entry.getKey() + "--------");
+            HashMap<String,String[]> inner_map=(HashMap)entry.getValue();
+            String class1="";
+            List<String> al=new ArrayList();
+            for(Map.Entry inner_entry: inner_map.entrySet()){
+                
+                String key=(String)inner_entry.getKey();
+                
+                if(key.equals("text")){
+                    String text[]=(String[])inner_entry.getValue();
+                    al=Arrays.asList(text);
+                }
+            }
+            System.out.println(bayes.classify(al).getCategory());
         }
     }
     
